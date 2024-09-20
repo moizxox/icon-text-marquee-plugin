@@ -3,7 +3,8 @@
 Plugin Name: Icon Text Marquee for Elementor
 Description: A custom Elementor widget to display a marquee of icons and text.
 Version: 1.0
-Author: Your Name
+Author: Mian Moiz
+Author URI: https://github.com/mianxox
 */
 
 if ( ! defined( 'ABSPATH' ) ) {

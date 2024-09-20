@@ -13,7 +13,7 @@ class Icon_Text_Marquee_Widget extends Widget_Base {
     }
 
     public function get_icon() {
-        return 'eicon-marquee'; // Choose an appropriate icon
+        return 'eicon-marquee';
     }
 
     public function get_categories() {
@@ -78,7 +78,7 @@ class Icon_Text_Marquee_Widget extends Widget_Base {
             [
                 'label' => __( 'Text Color', 'icon-text-marquee' ),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#000', // Default color
+                'default' => '#000',
                 'selectors' => [
                     '{{WRAPPER}} .mr-item span' => 'color: {{VALUE}};',
                 ],
@@ -91,7 +91,7 @@ class Icon_Text_Marquee_Widget extends Widget_Base {
             [
                 'label' => __( 'Background Color', 'icon-text-marquee' ),
                 'type' => Controls_Manager::COLOR,
-                'default' => '#32F9E2', // Default color
+                'default' => '#32F9E2',
                 'selectors' => [
                     '{{WRAPPER}} .logos' => 'background-color: {{VALUE}};',
                 ],
@@ -147,10 +147,32 @@ class Icon_Text_Marquee_Widget extends Widget_Base {
                     ],
                 ],
                 'default' => [
-                    'size' => 50, // Default width
+                    'size' => 50,
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .logos-slide img' => 'width: {{SIZE}}px;',
+                ],
+            ]
+        );
+
+        // Animation Speed Control
+        $this->add_control(
+            'animation_speed',
+            [
+                'label' => __( 'Animation Speed (seconds)', 'icon-text-marquee' ),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 8,
+                ],
+                'range' => [
+                    's' => [
+                        'min' => 1,
+                        'max' => 20,
+                        'step' => 1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .logos-slide' => 'animation-duration: {{SIZE}}s;',
                 ],
             ]
         );
@@ -161,16 +183,16 @@ class Icon_Text_Marquee_Widget extends Widget_Base {
     protected function render() {
         $settings = $this->get_settings_for_display();
         $items = $settings['items'];
-        $number_of_slides = 4; // Number of slides
-    
+        $number_of_slides = 4;
+
         // Determine background style
         $background_style = '';
         if (isset($settings['background_type']) && $settings['background_type'] === 'gradient') {
             $background_style = 'background: ' . esc_attr($settings['background_gradient']) . ';';
         } else {
-            $background_style = 'background-color: ' . (isset($settings['background_color']) ? esc_attr($settings['background_color']) : '#32F9E2') . ';'; // Default color
+            $background_style = 'background-color: ' . (isset($settings['background_color']) ? esc_attr($settings['background_color']) : '#32F9E2') . ';';
         }
-    
+
         ?>
         <div class="logos" style="<?php echo $background_style; ?>">
             <?php for ($i = 0; $i < $number_of_slides; $i++): ?>
@@ -186,5 +208,4 @@ class Icon_Text_Marquee_Widget extends Widget_Base {
         </div>
         <?php
     }
-    
 }
